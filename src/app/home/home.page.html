@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <form #meuform='ngForm'>
+      <ion-item>
+        <ion-label position='floating'>nome:</ion-label>
+        <ion-input #nome='ngModel' type='text' name='nome' [(ngModel)]='pessoa.nome' required minlength='3'></ion-input>
+      </ion-item>
+      <span style='color:red' *ngIf='nome.errors && nome.touched'>
+        <ion-label [hidden]='!nome.errors.required'>Nome é obrigatorio</ion-label><br>
+        <ion-label [hidden]='!nome.errors.minlength'>Minimo 3 caracteres</ion-label>
+      </span>
+      <ion-item>
+        <ion-label position='floating'>cpf:</ion-label>
+        <ion-input #cpf='ngModel' type='text' name='cpf' [(ngModel)]='pessoa.cpf' required minlength='11' pattern='[0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[\-][0-9]{2}'></ion-input>
+      </ion-item>
+      <span style='color:red' *ngIf='cpf.errors && cpf.touched'>
+        <ion-label [hidden]='!cpf.errors.required'>Cpf é obrigatorio</ion-label><br>
+        <ion-label [hidden]='!cpf.erros.minlength'>Quantidade minima de caracteres para cpf é 11</ion-label><br>
+        <ion-label [hidden]='!cpf.erros.pattern'>Formatação 000.000.000-00</ion-label>
+      </span>
+      <ion-button (click)='salvar()' expand='full' [disabled]='!meuform.form.valid'>Salvar</ion-button>
+    </form>
+  </div>
+</ion-content>
